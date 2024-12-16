@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pterodactyl Node Status</title>
+    <title>Ave Status</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -151,10 +151,10 @@
     </style>
 </head>
 <body>
-    <h1>Pterodactyl Panel Node Status</h1>
+    <h1>Ave Status Panel</h1>
 
     <div class="form-container">
-        <h2>Enter Your Panel URL and API Key</h2>
+        <h2>Enter Your Pterodactyl Panel URL and API Key</h2>
         <% if (error) { %>
             <p class="error"><%= error %></p>
         <% } %>
@@ -163,7 +163,7 @@
             <input type="text" id="panel_url" name="panel_url" placeholder="https://panel.yourdomain.com" required>
             <label for="api_key">API Key:</label>
             <input type="password" id="api_key" name="api_key" placeholder="API Key" required>
-            <button type="submit">Verify</button>
+            <button type="submit">Check Nodes Status</button>
         </form>
     </div>
 
