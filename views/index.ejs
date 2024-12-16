@@ -5,9 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pterodactyl Node Status</title>
     <style>
-        /* General Body and Layout Styles */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             background-color: #2d2d2d;
             color: white;
             margin: 0;
@@ -15,146 +14,139 @@
             overflow-x: hidden;
             animation: backgroundAnimation 8s ease infinite;
         }
-        h1 {
+
+        h1, h2 {
             text-align: center;
             padding: 20px;
             animation: fadeIn 1s ease-in-out;
         }
 
-        /* Background Animation */
-        @keyframes backgroundAnimation {
-            0% {
-                background-color: #2d2d2d;
-            }
-            50% {
-                background-color: #1e1e1e;
-            }
-            100% {
-                background-color: #2d2d2d;
-            }
-        }
-
-        /* Form and Box Animation */
         .form-container {
-            max-width: 400px;
+            max-width: 600px;
             margin: auto;
             padding: 20px;
             background-color: #444;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .form-container label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-container input,
+        .form-container button {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 10px;
             border-radius: 8px;
-            opacity: 0;
-            animation: formSlideIn 1s forwards ease-in-out;
-        }
-        @keyframes formSlideIn {
-            from {
-                transform: translateY(-30px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        /* Input Fields Animation */
-        input[type="text"], input[type="password"] {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 4px;
-            border: 1px solid #ccc;
-            background-color: #333;
-            color: white;
-            animation: inputFocus 1s ease-out infinite alternate;
-        }
-        @keyframes inputFocus {
-            0% {
-                background-color: #333;
-            }
-            100% {
-                background-color: #555;
-            }
-        }
-
-        button {
-            width: 100%;
-            padding: 10px;
-            background-color: #4CAF50;
-            color: white;
             border: none;
-            border-radius: 4px;
+            font-size: 16px;
+            background-color: #555;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .form-container input:focus,
+        .form-container button:hover {
+            background-color: #4CAF50;
+            transform: scale(1.05);
+        }
+
+        .form-container input::placeholder {
+            color: #bbb;
+        }
+
+        .form-container button {
+            background-color: #00bcd4;
             cursor: pointer;
-            transition: all 0.3s ease-in-out;
-        }
-        button:hover {
-            transform: scale(1.1);
-            background-color: #45a049;
         }
 
-        /* Loading Spinner */
+        .form-container button:active {
+            background-color: #00796b;
+        }
+
         .loader {
-            border: 8px solid #f3f3f3;
-            border-top: 8px solid #3498db;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: spin 2s linear infinite;
-            margin: 0 auto;
+            text-align: center;
+            font-size: 18px;
+            animation: blink 1.5s infinite;
         }
 
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
+        .loader span {
+            font-weight: bold;
+            color: #00bcd4;
         }
 
-        /* Node List Styles */
+        @keyframes blink {
+            0%, 50%, 100% { opacity: 0; }
+            25%, 75% { opacity: 1; }
+        }
+
         .node-list {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            animation: fadeIn 2s ease-in-out;
+            padding: 20px;
         }
 
         .node-card {
-            width: 250px;
-            margin: 10px;
-            padding: 20px;
-            border-radius: 8px;
             background-color: #444;
-            opacity: 0;
-            animation: nodeCardSlideIn 1s forwards ease-in-out;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px;
+            width: 250px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 1.5s ease-in-out;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        @keyframes nodeCardSlideIn {
-            from {
-                transform: translateY(30px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
+        .node-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
         }
 
-        .error {
-            color: red;
-            text-align: center;
+        .status-circle {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-left: 10px;
         }
 
-        /* Status Styles */
         .online {
-            color: #4CAF50;
+            background-color: #4CAF50;
         }
 
         .offline {
-            color: #f44336;
+            background-color: #f44336;
         }
 
         .maintenance {
-            color: #f39c12;
+            background-color: #f39c12;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(10px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes backgroundAnimation {
+            0% { background-color: #2d2d2d; }
+            50% { background-color: #333333; }
+            100% { background-color: #2d2d2d; }
+        }
+
+        @media screen and (max-width: 600px) {
+            .node-card {
+                width: 100%;
+            }
+
+            .node-list {
+                padding: 10px;
+            }
         }
     </style>
 </head>
@@ -163,24 +155,20 @@
 
     <div class="form-container">
         <h2>Enter Your Panel URL and API Key</h2>
-
         <% if (error) { %>
             <p class="error"><%= error %></p>
         <% } %>
-
         <form action="/" method="POST">
             <label for="panel_url">Panel URL:</label>
             <input type="text" id="panel_url" name="panel_url" placeholder="https://panel.yourdomain.com" required>
-
             <label for="api_key">API Key:</label>
             <input type="password" id="api_key" name="api_key" placeholder="API Key" required>
-
             <button type="submit">Verify</button>
         </form>
     </div>
 
     <% if (loading) { %>
-        <div class="loader"></div>
+        <div class="loader">Please wait... <span>.</span><span>.</span><span>.</span></div>
     <% } %>
 
     <% if (nodes && nodes.length) { %>
@@ -188,24 +176,23 @@
         <div class="node-list">
             <% nodes.forEach(node => { %>
                 <div class="node-card">
-                    <h2><%= node.attributes.name %></h2>
-                    <p><strong>Description:</strong> <%= node.attributes.description %></p>
-                    <p><strong>Memory:</strong> <%= node.attributes.memory %> MB</p>
-                    <p><strong>Disk:</strong> <%= node.attributes.disk %> GB</p>
+                    <h2><%= node.attributes.name || 'Unknown Name' %></h2>
+                    <p><strong>Description:</strong> <%= node.attributes.description || 'No description available' %></p>
+                    <p><strong>Memory:</strong> <%= node.attributes.memory || 'N/A' %> MB</p>
+                    <p><strong>Disk:</strong> <%= node.attributes.disk || 'N/A' %> GB</p>
                     <p><strong>Status:</strong>
                         <% if (node.status === 'Maintenance') { %>
-                            <span class="maintenance">Maintenance Mode</span>
+                            <span class="maintenance">Maintenance Mode <span class="status-circle maintenance"></span></span>
                         <% } else if (node.status === 'Online') { %>
-                            <span class="online">Online</span>
+                            <span class="online">Online <span class="status-circle online"></span></span>
                         <% } else { %>
-                            <span class="offline">Offline</span>
+                            <span class="offline">Offline <span class="status-circle offline"></span></span>
                         <% } %>
                     </p>
-                    <p><strong>FQDN:</strong> <%= node.attributes.fqdn %></p>
+                    <p><strong>FQDN:</strong> <%= node.attributes.fqdn || 'N/A' %></p>
                 </div>
             <% }) %>
         </div>
     <% } %>
-
 </body>
 </html>

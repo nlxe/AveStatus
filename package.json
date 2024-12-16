@@ -1,17 +1,40 @@
 {
-  "name": "avehoststatus",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "avestatus",         
+  "version": "0.1",              
+  "description": "Ave Status is the way you can see your pterodactyl panel status on your own server",               
+  "main": "index.js",             
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Currently no test command available for Ave Status\" && exit 1", 
+    "dev": "node .",               
+    "start": "node index.js",      
+    "build": "echo \"Currently no build command available for Ave Status\"", 
+    "lint": "eslint .",            
+    "deploy": "echo \"Currently no deployment command available for Ave Status\""
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
+  "keywords": [                   
+    "node", "express", "status", "monitoring", "ave"
+  ],
+  "author": "AveTeam",                   
+  "license": "ISC",                
+  "dependencies": {             
     "axios": "^1.7.9",
     "ejs": "^3.1.10",
-    "express": "^4.21.2"
-  }
+    "express": "^4.21.2",
+    "node-fetch": "^3.3.2"
+  },
+  "devDependencies": {            
+    "nodemon": "^2.0.22",        
+    "eslint": "^8.15.0"           
+  },
+  "engines": {               
+    "node": ">=14.0.0"
+  },
+  "repository": {                 
+    "type": "git",
+    "url": "git+https://github.com/nlxe/AvehostStatus.git"
+  },
+  "bugs": {                      
+    "url": "https://github.com/nlxe/AvehostStatus/issues"
+  },
+  "homepage": "https://avestatus.avehubs.com" 
 }
