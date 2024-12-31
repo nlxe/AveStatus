@@ -1,198 +1,170 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ave Status</title>
+    <title>Node Status</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #2d2d2d;
-            color: white;
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            overflow-x: hidden;
-            animation: backgroundAnimation 8s ease infinite;
+            background-color: #f0f8ff;
+            color: #333;
         }
 
-        h1, h2 {
-            text-align: center;
-            padding: 20px;
-            animation: fadeIn 1s ease-in-out;
-        }
-
-        .form-container {
-            max-width: 600px;
-            margin: auto;
-            padding: 20px;
-            background-color: #444;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            animation: fadeIn 1s ease-in-out;
-        }
-
-        .form-container label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-
-        .form-container input,
-        .form-container button {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 10px;
-            border-radius: 8px;
-            border: none;
-            font-size: 16px;
-            background-color: #555;
+        .christmas-header {
+            background-color: #f44336;
             color: white;
-            transition: all 0.3s ease;
-        }
-
-        .form-container input:focus,
-        .form-container button:hover {
-            background-color: #4CAF50;
-            transform: scale(1.05);
-        }
-
-        .form-container input::placeholder {
-            color: #bbb;
-        }
-
-        .form-container button {
-            background-color: #00bcd4;
-            cursor: pointer;
-        }
-
-        .form-container button:active {
-            background-color: #00796b;
-        }
-
-        .loader {
             text-align: center;
-            font-size: 18px;
-            animation: blink 1.5s infinite;
+            padding: 15px;
+            font-size: 24px;
         }
 
-        .loader span {
+        .christmas-footer {
+            background-color: #f44336;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            position: absolute;
+            width: 100%;
+            bottom: 0;
+        }
+
+        .christmas-greeting {
+            font-size: 30px;
             font-weight: bold;
-            color: #00bcd4;
         }
 
-        @keyframes blink {
-            0%, 50%, 100% { opacity: 0; }
-            25%, 75% { opacity: 1; }
+        .snowflakes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .snowflake {
+            position: absolute;
+            top: -10px;
+            font-size: 2em;
+            animation: snow 10s linear infinite;
+        }
+
+        @keyframes snow {
+            0% {
+                transform: translateY(-10px);
+            }
+
+            100% {
+                transform: translateY(100vh);
+            }
+        }
+
+        .node-status-container {
+            text-align: center;
+            margin: 20px;
         }
 
         .node-list {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
+        }
+
+        .node-item {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 15px;
             padding: 20px;
-        }
-
-        .node-card {
-            background-color: #444;
-            border-radius: 10px;
-            padding: 15px;
-            margin: 10px;
             width: 250px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            animation: fadeIn 1.5s ease-in-out;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: left;
+            transition: transform 0.3s ease;
         }
 
-        .node-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+        .node-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
         }
 
-        .status-circle {
-            width: 15px;
-            height: 15px;
-            border-radius: 50%;
-            display: inline-block;
-            margin-left: 10px;
+        .node-item h2 {
+            color: #f44336;
+            font-size: 18px;
+            margin-bottom: 10px;
         }
 
-        .online {
-            background-color: #4CAF50;
+        .node-item p {
+            font-size: 14px;
+            margin: 5px 0;
         }
 
-        .offline {
-            background-color: #f44336;
+        .node-specs,
+        .node-uptime {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 10px;
         }
 
-        .maintenance {
-            background-color: #f39c12;
+        .node-specs p,
+        .node-uptime p {
+            font-weight: bold;
+            color: #555;
         }
 
-        @keyframes fadeIn {
-            0% { opacity: 0; transform: translateY(10px); }
-            100% { opacity: 1; transform: translateY(0); }
+        .node-specs span,
+        .node-uptime span {
+            color: #f44336;
         }
 
-        @keyframes backgroundAnimation {
-            0% { background-color: #2d2d2d; }
-            50% { background-color: #333333; }
-            100% { background-color: #2d2d2d; }
-        }
-
-        @media screen and (max-width: 600px) {
-            .node-card {
-                width: 100%;
-            }
-
-            .node-list {
-                padding: 10px;
-            }
+        footer .snowflake {
+            font-size: 1.5em;
         }
     </style>
 </head>
-<body>
-    <h1>Ave Status Panel</h1>
 
-    <div class="form-container">
-        <h2>Enter Your Pterodactyl Panel URL and API Key</h2>
-        <% if (error) { %>
-            <p class="error"><%= error %></p>
-        <% } %>
-        <form action="/" method="POST">
-            <label for="panel_url">Panel URL:</label>
-            <input type="text" id="panel_url" name="panel_url" placeholder="https://panel.yourdomain.com" required>
-            <label for="api_key">API Key:</label>
-            <input type="password" id="api_key" name="api_key" placeholder="API Key" required>
-            <button type="submit">Check Nodes Status</button>
-        </form>
+<body>
+    <header class="christmas-header">
+        <span class="christmas-greeting">🎄 Merry Christmas 🎄</span>
+    </header>
+
+    <div class="snowflakes">
+        <div class="snowflake" style="left: 10%;">❄️</div>
+        <div class="snowflake" style="left: 25%;">❄️</div>
+        <div class="snowflake" style="left: 40%;">❄️</div>
+        <div class="snowflake" style="left: 60%;">❄️</div>
+        <div class="snowflake" style="left: 80%;">❄️</div>
     </div>
 
-    <% if (loading) { %>
-        <div class="loader">Please wait... <span>.</span><span>.</span><span>.</span></div>
-    <% } %>
-
-    <% if (nodes && nodes.length) { %>
-        <h2>Node Status</h2>
+    <div class="node-status-container">
+        <h1>Node Status</h1>
         <div class="node-list">
-            <% nodes.forEach(node => { %>
-                <div class="node-card">
-                    <h2><%= node.attributes.name || 'Unknown Name' %></h2>
-                    <p><strong>Description:</strong> <%= node.attributes.description || 'No description available' %></p>
-                    <p><strong>Memory:</strong> <%= node.attributes.memory || 'N/A' %> MB</p>
-                    <p><strong>Disk:</strong> <%= node.attributes.disk || 'N/A' %> GB</p>
-                    <p><strong>Status:</strong>
-                        <% if (node.status === 'Maintenance') { %>
-                            <span class="maintenance">Maintenance Mode <span class="status-circle maintenance"></span></span>
-                        <% } else if (node.status === 'Online') { %>
-                            <span class="online">Online <span class="status-circle online"></span></span>
-                        <% } else { %>
-                            <span class="offline">Offline <span class="status-circle offline"></span></span>
-                        <% } %>
-                    </p>
-                    <p><strong>FQDN:</strong> <%= node.attributes.fqdn || 'N/A' %></p>
+            <% nodes.forEach(function(node) { %>
+                <div class="node-item">
+                    <h2><%= node.name %></h2>
+                    <p>FQDN: <%= node.fqdn %></p>
+                    <div class="node-specs">
+                        <p>Memory: <span><%= node.memory %> MB</span></p>
+                        <p>Disk: <span><%= node.disk %> GB</span></p>
+                        <p>Location: <span><%= node.location %></span></p>
+                        <p>Servers Count: <span><%= node.servers_count %></span></p>
+                    </div>
+                    <div class="node-uptime">
+                        <p>Created at: <span><%= new Date(node.created_at).toLocaleString() %></span></p>
+                        <p>Status: <span><%= node.status %></span></p>
+                    </div>
                 </div>
-            <% }) %>
+            <% }); %>
         </div>
-    <% } %>
+    </div>
+
+    <footer class="christmas-footer">
+        <p>Made with ❤️ by Your Name</p>
+    </footer>
 </body>
+
 </html>

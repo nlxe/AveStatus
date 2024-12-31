@@ -1,40 +1,49 @@
 {
-  "name": "avestatus",         
-  "version": "0.1",              
-  "description": "Ave Status is the way you can see your pterodactyl panel status on your own server",               
-  "main": "index.js",             
+  "name": "avestatus",
+  "version": "0.1",
+  "description": "Ave Status is the way you can see your pterodactyl panel status on your own server",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Currently no test command available for Ave Status\" && exit 1", 
-    "dev": "node .",               
-    "start": "node index.js",      
-    "build": "echo \"Currently no build command available for Ave Status\"", 
-    "lint": "eslint .",            
+    "test": "echo \"Currently no test command available for Ave Status\" && exit 1",
+    "dev": "node .",
+    "start": "node index.js",
+    "build": "echo \"Currently no build command available for Ave Status\"",
+    "lint": "eslint .",
     "deploy": "echo \"Currently no deployment command available for Ave Status\""
   },
-  "keywords": [                   
-    "node", "express", "status", "monitoring", "ave"
+  "keywords": [
+    "node",
+    "express",
+    "status",
+    "monitoring",
+    "ave"
   ],
-  "author": "AveTeam",                   
-  "license": "ISC",                
-  "dependencies": {             
+  "author": "AveTeam",
+  "license": "ISC",
+  "dependencies": {
     "axios": "^1.7.9",
+    "body-parser": "^1.20.3",
+    "cron": "^3.3.1",
+    "dotenv": "^16.4.7",
     "ejs": "^3.1.10",
     "express": "^4.21.2",
+    "js-yaml": "^4.1.0",
+    "mongoose": "^8.9.1",
     "node-fetch": "^3.3.2"
   },
-  "devDependencies": {            
-    "nodemon": "^2.0.22",        
-    "eslint": "^8.15.0"           
+  "devDependencies": {
+    "eslint": "^8.15.0",
+    "nodemon": "^2.0.22"
   },
-  "engines": {               
+  "engines": {
     "node": ">=14.0.0"
   },
-  "repository": {                 
+  "repository": {
     "type": "git",
     "url": "https://github.com/nlxe/AvehostStatus.git"
   },
-  "bugs": {                      
+  "bugs": {
     "url": "https://github.com/nlxe/AvehostStatus/issues"
   },
-  "homepage": "https://avestatus.avehubs.com" 
+  "homepage": "https://avestatus.avehubs.com"
 }

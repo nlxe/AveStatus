@@ -1,0 +1,9 @@
+panel_url: https://panel.sentinel-host.com
+api_key: ptla_h2swZeKAEA8nEsElpYRSjmou6evfLw0XwCIytkEmPpo
+nodeVisibility: public
+nodes:
+  - name: Netherlands
+    fqdn: n1.sentinel-host.com
+    memory: 100000
+    disk: 500000
+    status: Offline
